@@ -67,7 +67,9 @@ fi
 if [[ -n $HELM_REPO_NAME && -n $HELM_REPO_BUCKET ]]; then
   echo "Adding repo bucket $HELM_REPO_BUCKET"
   helm plugin install https://github.com/hayorov/helm-gcs
-  helm repo add $HELM_REPO_NAME gs://$HELM_REPO_BUCKET
+  helm repo add $HELM_REPO_NAME gs://$HELM_REPO_BUCKET/charts
+  # mkdir charts
+  # gsutil rsync gs://$HELM_REPO_BUCKET ./charts
 fi
 
 echo "Running: helm repo update"

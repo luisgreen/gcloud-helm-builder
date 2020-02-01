@@ -19,6 +19,4 @@ RUN chmod +x /builder/helm.bash && \
 
 ENV PATH=/builder/helm/:$PATH
 
-RUN helm plugin install https://github.com/hayorov/helm-gcs
-
 ENTRYPOINT ["/builder/helm.bash"]
