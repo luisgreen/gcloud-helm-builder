@@ -66,6 +66,7 @@ fi
 # repo bucket to local
 if [[ -n $HELM_REPO_NAME && -n $HELM_REPO_BUCKET ]]; then
   echo "Adding repo bucket $HELM_REPO_BUCKET"
+  helm plugin install https://github.com/hayorov/helm-gcs
   helm repo add $HELM_REPO_NAME gs://$HELM_REPO_BUCKET
 fi
 
