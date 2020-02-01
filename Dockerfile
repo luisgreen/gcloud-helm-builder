@@ -14,7 +14,8 @@ RUN chmod +x /builder/helm.bash && \
   rm helm.tar.gz && \
   apt-get --purge -y autoremove && \
   apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/* && \
+  mkdir -p ~/.helm/plugins
 
 ENV PATH=/builder/helm/:$PATH
 
