@@ -21,14 +21,18 @@ RUN chmod +x /builder/helm.bash && \
   mkdir -p ~/.helm/plugins
 
 RUN mkdir -p /root/.ssh && \
-    chmod 0700 /root/.ssh && \
-    ssh-keyscan github.com > /root/.ssh/known_hosts
+  chmod 0700 /root/.ssh && \
+  ssh-keyscan github.com > /root/.ssh/known_hosts
 
 # Add the keys and set permissions
 RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
-    echo "$ssh_pub_key" > /root/.ssh/id_rsa.pub && \
-    chmod 600 /root/.ssh/id_rsa && \
-    chmod 600 /root/.ssh/id_rsa.pub
+  echo "$ssh_pub_key" > /root/.ssh/id_rsa.pub && \
+  chmod 600 /root/.ssh/id_rsa && \
+  chmod 600 /root/.ssh/id_rsa.pub
+
+RUN helm init --client-only && \
+  helm plugin install https://github.com/aslafy-z/helm-git.git && \
+  helm repo add gorilla git+ssh://git@github.com/luisgreen/gorilla-helm-charts@?ref=master
 
 ENV PATH=/builder/helm/:$PATH
 
