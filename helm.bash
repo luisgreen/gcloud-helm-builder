@@ -30,20 +30,6 @@ EOF
     fi
 fi
 
-# # if HELM_VERSION starts with v2, initialize Helm
-# if [[ $HELM_VERSION =~ ^v2 ]]; then
-#   echo "Running: helm init --client-only"
-#   helm init --client-only
-# else
-#   echo "Skipped 'helm init --client-only' because not v2"
-# fi
-
-# if GCS_PLUGIN_VERSION is set, install the plugin
-if [[ -n $GCS_PLUGIN_VERSION ]]; then
-  echo "Installing helm GCS plugin version $GCS_PLUGIN_VERSION "
-  helm plugin install https://github.com/nouney/helm-gcs --version $GCS_PLUGIN_VERSION
-fi
-
 # if DIFF_PLUGIN_VERSION is set, install the plugin
 if [[ -n $DIFF_PLUGIN_VERSION ]]; then
   echo "Installing helm DIFF plugin version $DIFF_PLUGIN_VERSION "
@@ -63,15 +49,8 @@ if [[ -n $HELM_REPO_NAME && -n $HELM_REPO_URL ]]; then
   helm repo add $HELM_REPO_NAME $HELM_REPO_URL
 fi
 
-# repo bucket to local
-if [[ -n $HELM_REPO_NAME && -n $HELM_REPO_BUCKET ]]; then
-  echo "Adding repo bucket $HELM_REPO_BUCKET"
-  helm repo add bucket https://$HELM_REPO_BUCKET.storage.googleapis.com
-fi
-
 echo "Running: helm repo update"
 helm repo list && helm repo update || true
-
 
 # if 'TILLERLESS=true' is set, run a local tiller server with the secret backend
 # see also https://github.com/helm/helm/blob/master/docs/securing_installation.md#running-tiller-locally
