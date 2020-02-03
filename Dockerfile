@@ -30,12 +30,6 @@ RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
   chmod 600 /root/.ssh/id_rsa && \
   chmod 600 /root/.ssh/id_rsa.pub
 
-USER builder
-
 ENV PATH=/builder/helm/:$PATH
-
-RUN helm init --client-only && \
-  helm plugin install https://github.com/aslafy-z/helm-git.git && \
-  helm repo add gorilla git+ssh://git@github.com/luisgreen/gorilla-helm-charts@?ref=master
 
 ENTRYPOINT ["/builder/helm.bash"]

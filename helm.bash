@@ -30,15 +30,11 @@ EOF
     fi
 fi
 
-# if HELM_VERSION starts with v2, initialize Helm
-# if [[ $HELM_VERSION =~ ^v2 ]]; then
-#   echo "Running: helm init --client-only"
-#   helm init --client-only
-#   helm plugin install https://github.com/aslafy-z/helm-git.git
-#   helm repo add gorilla git+ssh://git@github.com/luisgreen/gorilla-helm-charts@?ref=master
-# else
-#   echo "Skipped 'helm init --client-only' because not v2"
-# fi
+echo "AM $(whoami)"
+echo "Running: helm init --client-only"
+helm init --client-only
+helm plugin install https://github.com/aslafy-z/helm-git.git
+helm repo add gorilla git+ssh://git@github.com/luisgreen/gorilla-helm-charts@?ref=master
 
 # if GCS_PLUGIN_VERSION is set, install the plugin
 if [[ -n $GCS_PLUGIN_VERSION ]]; then
