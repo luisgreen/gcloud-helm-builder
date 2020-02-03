@@ -30,7 +30,6 @@ EOF
     fi
 fi
 
-echo "AM $(whoami)"
 echo "Running: helm init --client-only"
 helm init --client-only
 helm plugin install https://github.com/aslafy-z/helm-git.git
