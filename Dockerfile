@@ -1,6 +1,6 @@
 FROM gcr.io/cloud-builders/gcloud
 
-ARG HELM_VERSION=v2.14.3
+ARG HELM_VERSION=v3.0.3
 ARG ssh_prv_key
 ARG ssh_pub_key
 
