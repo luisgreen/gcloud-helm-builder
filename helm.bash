@@ -30,8 +30,8 @@ EOF
     fi
 fi
 
-echo "Running: helm init --client-only"
-helm init --client-only
+# echo "Running: helm init --client-only"
+# helm init --client-only
 helm plugin install https://github.com/aslafy-z/helm-git.git
 helm repo add gorilla git+ssh://git@github.com/luisgreen/gorilla-helm-charts@?ref=master
 
